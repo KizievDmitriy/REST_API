@@ -29,7 +29,7 @@ router.get("/:contactId", async (req, res, next) => {
 });
 
 router.post("/", addContactValidation, async (req, res, next) => {
-  
+
   try {
     const listContacts = await contacts.listContacts();
     const addNewContact = await contacts.addContact(req.body);
@@ -65,7 +65,7 @@ router.delete("/:contactId", async (req, res, next) => {
 });
 
 router.put("/:contactId", addContactValidation, async (req, res, next) => {
-  
+
   try {
     const { contactId } = req.params;
     if (!req.body) {
