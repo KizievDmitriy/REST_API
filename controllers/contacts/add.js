@@ -1,9 +1,8 @@
 const contacts = require("../../models/contacts");
 const { RequestError } = require("../../helpers");
 
-const add = async (req, res, next) => {
+const add = async (req, res) => {
 
-    try {
         const listContacts = await contacts.listContacts();
         const addNewContact = await contacts.addContact(req.body);
         if (listContacts.find((el) => el.email === req.body.email)) {
@@ -13,9 +12,6 @@ const add = async (req, res, next) => {
             throw RequestError(400, "Missing required field");
         }
         res.status(201).json(addNewContact);
-    } catch (error) {
-        next(error);
-    }
 };
 
 module.exports = add;

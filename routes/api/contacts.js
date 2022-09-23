@@ -6,14 +6,16 @@ const {
   addContactValidation,
 } = require("../../schemas/validationMidleware");
 
-router.get("/", ctrl.getAll);
+const ctrlWrapper = require('../../helpers/ctrlWrapper')
 
-router.get("/:contactId", ctrl.getById);
+router.get("/", ctrlWrapper(ctrl.getAll));
 
-router.post("/", addContactValidation, ctrl.add);
+router.get("/:contactId", ctrlWrapper(ctrl.getById));
 
-router.delete("/:contactId", ctrl.deleteById);
+router.post("/", addContactValidation, ctrlWrapper(ctrl.add));
 
-router.put("/:contactId", addContactValidation, ctrl.updateById);
+router.delete("/:contactId", ctrlWrapper(ctrl.deleteById));
+
+router.put("/:contactId", addContactValidation, ctrlWrapper(ctrl.updateById));
 
 module.exports = router;
