@@ -1,6 +1,10 @@
 const shortid = require("shortid");
 const fs = require("fs").promises;
 const path = require("path");
+const { connectDB } = require('../db/connectDB');
+
+connectDB();
+
 
 const contactsPath = path.join(__dirname, "./contacts.json");
 
