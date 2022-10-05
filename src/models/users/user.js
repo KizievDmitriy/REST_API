@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const Joi = require("joi");
 const bcrypt = require('bcryptjs');
-const { handleValidationErrors } = require("../../middlewares");
+
 
 
 const passwordRegexp = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/;
@@ -33,11 +33,8 @@ const userSchema = new Schema({
 }, { versionKey: false, timestamps: true });
 
 userSchema.methods.validatePassword = function (password) {
-  return bcrypt.compareSync(password, this.password);
+  return bcrypt.compare(password, this.password);
 };
-userSchema.post("save", handleValidationErrors);
-
-
 
 const subscriptionSchemas = Joi.object({
   subscription: Joi.string().valid("starter", "pro", "business").required(),
