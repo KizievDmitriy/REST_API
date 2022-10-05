@@ -1,7 +1,6 @@
-const { User, registerSchemas, subscriptionSchemas } = require("./users");
+const { User, schemas } = require("./user");
 
 module.exports = {
   User,
-  registerSchemas,
-  subscriptionSchemas,
+  schemas,
 };
