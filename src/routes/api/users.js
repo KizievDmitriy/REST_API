@@ -12,6 +12,10 @@ router.post("/login", validation(schemas.signupSchemas), ctrlWrapper(ctrl.login)
 
 router.get("/current", auth, ctrlWrapper(ctrl.getCurrent));
 
+router.get("/logout", auth, ctrlWrapper(ctrl.logout));
+
+router.patch("/:id/subscription", auth, validation(schemas.subscriptionSchema), ctrlWrapper(ctrl.updateSubscription));
+
 
 
 
