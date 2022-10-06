@@ -9,9 +9,7 @@ const changeById = async (req, res) => {
   if (!result) {
     throw new NotFound(`Contact with id=${contactId} not found`);
   }
-  res.json({
-    status: "success",
-    code: 200,
+  res.status(200).json({
     data: {
       result,
     },
