@@ -29,7 +29,11 @@ const userSchema = new Schema({
     token: {
         type: String,
         default: null,
-    },
+  },
+  avatarURL: {
+    type: String,
+    required: [true, 'Avatar is required'],
+    }
 }, { versionKey: false, timestamps: true });
 
 userSchema.methods.validatePassword = function (password) {
