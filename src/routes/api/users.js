@@ -1,6 +1,6 @@
 const express = require("express");
 
-const { ctrlWrapper, validation, auth, upload} = require("../../middlewares");
+const { ctrlWrapper, validation, auth, upload } = require("../../middlewares");
 const { users: ctrl } = require("../../controllers");
 const { schemas } = require('../../models/users');
 
