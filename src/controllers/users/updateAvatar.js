@@ -4,11 +4,12 @@ const fs = require("fs/promises");
 
 const updateAvatar = async (req, res) => {
     const { path: tempUpload, originalname } = req.file;
-
+    const { _id: id } = req.user;
+    const avatarName = `${id}_${originalname}`;
     try {
-        const resultUpload = path.join(__dirname, "../../../", "public", "avatars", originalname);
+        const resultUpload = path.join(__dirname, "../../../", "public", "avatars", avatarName);
         await fs.rename(tempUpload, resultUpload);
-        const avatarURL = path.join("public", "avatars", originalname);
+        const avatarURL = path.join("public", "avatars", avatarName);
         await User.findByIdAndUpdate(req.user._id, { avatarURL });
         res.json({ avatarURL });
     } catch (error) {
