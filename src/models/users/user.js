@@ -3,7 +3,6 @@ const Joi = require("joi");
 const bcrypt = require('bcryptjs');
 
 
-
 const passwordRegexp = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/;
 const emailRegexp = /^.+@.+$/;
 
@@ -57,9 +56,14 @@ const signupSchemas = Joi.object({
   email: Joi.string().pattern(emailRegexp).trim().required(),
 });
 
+const verifyEmailSchemas = Joi.object({
+  email: Joi.string().pattern(emailRegexp).trim().required(),
+})
+
 const schemas = {
   signupSchemas,
   subscriptionSchemas,
+  verifyEmailSchemas
 };
 
 const User = model("user", userSchema);
