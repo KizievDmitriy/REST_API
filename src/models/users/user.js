@@ -3,37 +3,44 @@ const Joi = require("joi");
 const bcrypt = require('bcryptjs');
 
 
-
 const passwordRegexp = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,})\S$/;
 const emailRegexp = /^.+@.+$/;
 
 
 const userSchema = new Schema({
-    password: {
-        type: String,
-        required: [true, 'Password is required'],
-        minlength: 6,
-        match: passwordRegexp,
-    },
-     email: {
-        type: String,
-        required: [true, 'Email is required'],
-        match: emailRegexp,
-        unique: true,
-    },
-    subscription: {
-        type: String,
-        enum: ["starter", "pro", "business"],
-        default: "starter"
-    },
-    token: {
-        type: String,
-        default: null,
+  password: {
+    type: String,
+    required: [true, 'Password is required'],
+    minlength: 6,
+    match: passwordRegexp,
+  },
+  email: {
+    type: String,
+    required: [true, 'Email is required'],
+    match: emailRegexp,
+    unique: true,
+  },
+  subscription: {
+    type: String,
+    enum: ["starter", "pro", "business"],
+    default: "starter"
+  },
+  token: {
+    type: String,
+    default: null,
   },
   avatarURL: {
     type: String,
     required: [true, 'Avatar is required'],
-    }
+  },
+  verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, 'Verify token is required'],
+  }
 }, { versionKey: false, timestamps: true });
 
 userSchema.methods.validatePassword = function (password) {
@@ -49,14 +56,19 @@ const signupSchemas = Joi.object({
   email: Joi.string().pattern(emailRegexp).trim().required(),
 });
 
+const verifyEmailSchemas = Joi.object({
+  email: Joi.string().pattern(emailRegexp).trim().required(),
+})
+
 const schemas = {
   signupSchemas,
   subscriptionSchemas,
+  verifyEmailSchemas
 };
 
 const User = model("user", userSchema);
 
 module.exports = {
-    User,
-    schemas,
+  User,
+  schemas,
 }
