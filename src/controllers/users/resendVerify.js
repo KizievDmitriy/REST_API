@@ -1,7 +1,7 @@
 const { User } = require("../../models/users");
 const { BadRequest } = require("http-errors");
 
-const { sendEmail, createVerifyEmail } = require("../../sendgrip")
+const { sendEmail, createVerifyEmail } = require("../../services")
 
 const resendVerify = async (req, res) => {
     const { email } = req.body;

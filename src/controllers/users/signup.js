@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 const { Conflict } = require("http-errors");
 const gravatar = require('gravatar');
 const { User } = require('../../models/users');
-const { sendEmail, createVerifyEmail } = require("../../sendgrip")
+const { sendEmail, createVerifyEmail } = require("../../services")
 
 const signup = async (req, res) => {
   const { email, password, subscription } = req.body;
